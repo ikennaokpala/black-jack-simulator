@@ -16,11 +16,25 @@ Add this line to your application's Gemfile:
 
 ```bash
 $ cd black-jack-game # or path to this repo
-$ bundle install
+$ bin/setup
 
 ```
 
 ## To run tests
+
+```bash
+$ cd black-jack-game # or path to this repo
+$ bin/rspec
+
+```
+or
+
+```bash
+$ cd black-jack-game # or path to this repo
+$ bin/rake
+
+```
+or
 
 ```bash
 $ cd black-jack-game # or path to this repo

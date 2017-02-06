@@ -1,0 +1,3 @@
+export PATH="/usr/local/heroku/bin:/Users/ikennaokpala/.rvm/gems/ruby-2.3.0/bin:/Users/ikennaokpala/.rvm/gems/ruby-2.3.0@global/bin:/Users/ikennaokpala/.rvm/rubies/ruby-2.3.0/bin:$PATH"
+export GEM_PATH="/Users/ikennaokpala/.rvm/gems/ruby-2.3.0:/Users/ikennaokpala/.rvm/gems/ruby-2.3.0@global:vendor/bundle"
+export GEM_HOME="vendor/bundle"

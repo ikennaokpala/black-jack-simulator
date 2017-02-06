@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+if
+  [[ -s "vendor/bundle/environment" ]]
+then
+  source "vendor/bundle/environment"
+  exec gem "$@"
+else
+  echo "ERROR: Missing RVM environment file: 'vendor/bundle/environment'" >&2
+  exit 1
+fi
