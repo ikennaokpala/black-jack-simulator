@@ -17,6 +17,10 @@ module BlackJack
       @deck = deck
       @standard_out = standard_out
       @cards = cards
+
+      if score >= 20
+        dealer_update(": #{values.join(' ')}")
+      end
     end
 
     def add(card)

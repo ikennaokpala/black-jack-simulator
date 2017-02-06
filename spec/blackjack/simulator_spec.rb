@@ -110,4 +110,34 @@ describe BlackJack::Simulator do
 
     expect(standard_out.string).to eq(expected)
   end
+
+  it "plays out fifth scenario as specified and dealer wins" do
+    cards = [
+      BlackJack::Card.new("hearts", "J", 12),
+      BlackJack::Card.new("diamonds", 10, 10),
+      BlackJack::Card.new("diamonds", 8, 8),
+      BlackJack::Card.new("clubs", "Q", 13),
+      BlackJack::Card.new("clubs", "K", 14),
+      BlackJack::Card.new("spades", 6, 6),
+      BlackJack::Card.new("diamonds", 8, 8),
+      BlackJack::Card.new("clubs", "A", 11),
+    ]
+    expected = \
+      "Dealer: 12 10\n"\
+      "Dealer: 8 13\n"\
+      "Dealer: 14 6\n"\
+      "Dealer: 8 11\n"\
+      "Player: stand\n"\
+      "Dealer Wins!\n"
+
+
+    allow_any_instance_of(BlackJack::Deck).to receive(:next_card).and_return(*cards)
+
+    standard_in.puts('stand')
+    standard_in.rewind
+
+    BlackJack::Simulator.new(standard_in, standard_out, BlackJack::Deck.new).play
+
+    expect(standard_out.string).to eq(expected)
+  end
 end
