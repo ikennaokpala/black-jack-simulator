@@ -12,7 +12,11 @@ module BlackJack
 
     def play(move)
       player_update(": #{move}")
-      hit
+      if hit?(move)
+        hit
+      elsif stand?(move)
+        stand
+      end
     end
 
     def in_play?
@@ -20,6 +24,10 @@ module BlackJack
     end
 
   protected
+
+    def hit?(move)
+      move == "hit"
+    end
 
     def hit
       card = @deck.next_card
@@ -33,6 +41,31 @@ module BlackJack
       end
     end
 
+    def stand?(move)
+      move == "stand"
+    end
+
+    def stand
+      @in_play = false
+      last_card = @dealer.cards.last
+      dealers_cards = []
+
+      while score(dealers_cards+[last_card]) < 17
+        card = @deck.next_card
+        dealers_cards << card
+        @dealer.add(card)
+      end
+
+      dealer_update(": #{dealers_cards.map(&:to_s).join(' ')}")
+
+      if @dealer.score_above_highest_possible_score?
+        player_update(" Wins!")
+      end
+    end
+
+    def score(cards)
+      cards.map(&:value).reduce(:+)
+    end
     def dealer_update(notice)
       @standard_out.puts("Dealer#{notice}")
     end
