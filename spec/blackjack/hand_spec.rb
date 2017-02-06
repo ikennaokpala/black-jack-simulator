@@ -1,6 +1,7 @@
 require "spec_helper"
 
 describe BlackJack::Hand do
+  let(:standard_out) { StringIO.new }
   let(:cards) do
     [
       BlackJack::Card.new("hearts", 2, 2),
@@ -8,7 +9,7 @@ describe BlackJack::Hand do
     ]
   end
 
-  subject{ BlackJack::Hand.new(cards)}
+  subject{ BlackJack::Hand.new(standard_out, cards, BlackJack::Deck.new)}
 
   it "can add card to existing collection of cards" do
     subject.add(BlackJack::Card.new("spades", "A", 11))
@@ -35,7 +36,7 @@ describe BlackJack::Hand do
       ]
     end
 
-    subject{ BlackJack::Hand.new(win_cards)}
+    subject{ BlackJack::Hand.new(standard_out, win_cards, BlackJack::Deck.new)}
 
     it "sum of cards (i.e score) more than highest possible" do
       expect(subject.score_above_highest_possible_score?).to eq(true)
